@@ -7,6 +7,7 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -39,9 +40,24 @@ public class CityRepoImpl implements CityRepo {
     }
 
     @Override
-    public void printAllCities() {
-        for (City city : cities) {
-            System.out.println(city.toString());
-        }
+    public List<City> getAllCities() {
+        return cities;
+    }
+
+    @Override
+    public List<City> sortCitiesByName() {
+        //List<Word> sortedWords = words.stream()
+        //    .sorted(Comparator.comparing(w -> countLetter(w, 'a')))
+        //    .collect(Collectors.toList());
+        return cities.stream()
+                .sorted(Comparator.comparing(city -> city.getName().toLowerCase()))
+                .toList();
+    }
+
+    @Override
+    public List<City> sortCitiesByDistrictAndName() {
+        return cities.stream()
+                .sorted(Comparator.comparing(City::getDistrict).thenComparing(City::getName))
+                .toList();
     }
 }

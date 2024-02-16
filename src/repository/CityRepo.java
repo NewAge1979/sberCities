@@ -1,5 +1,11 @@
 package repository;
 
+import model.City;
+
+import java.util.List;
+
 public interface CityRepo {
-    void printAllCities();
+    List<City> getAllCities();
+    List<City> sortCitiesByName();
+    List<City> sortCitiesByDistrictAndName();
 }
