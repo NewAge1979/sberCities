@@ -3,8 +3,7 @@ package service;
 import model.City;
 import repository.CityRepo;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class CityServImpl implements CityServ {
     private final CityRepo cityRepo;
@@ -31,5 +30,10 @@ public class CityServImpl implements CityServ {
     @Override
     public Optional<City> getBigCity() {
         return cityRepo.getBigCity();
+    }
+
+    @Override
+    public TreeMap<String, Long> getCitiesByRegion() {
+        return cityRepo.getCitiesByRegion();
     }
 }

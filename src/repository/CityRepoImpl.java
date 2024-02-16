@@ -7,6 +7,7 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CityRepoImpl implements CityRepo {
     private final List<City> cities = new ArrayList<>();
@@ -61,5 +62,13 @@ public class CityRepoImpl implements CityRepo {
     @Override
     public Optional<City> getBigCity() {
         return cities.stream().max(Comparator.comparing(City::getPopulation));
+    }
+
+    @Override
+    public TreeMap<String, Long> getCitiesByRegion() {
+        Map<String, Long> citiesByRegion = cities.stream()
+                .sorted(Comparator.comparing(City::getRegion))
+                .collect(Collectors.groupingBy(City::getRegion, Collectors.counting()));
+        return new TreeMap<>(citiesByRegion);
     }
 }
