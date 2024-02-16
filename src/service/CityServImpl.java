@@ -4,6 +4,7 @@ import model.City;
 import repository.CityRepo;
 
 import java.util.List;
+import java.util.Optional;
 
 public class CityServImpl implements CityServ {
     private final CityRepo cityRepo;
@@ -25,5 +26,10 @@ public class CityServImpl implements CityServ {
     @Override
     public List<City> sortCitiesByDistrictAndName() {
         return cityRepo.sortCitiesByDistrictAndName();
+    }
+
+    @Override
+    public Optional<City> getBigCity() {
+        return cityRepo.getBigCity();
     }
 }

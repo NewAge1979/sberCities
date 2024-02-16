@@ -6,10 +6,7 @@ import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class CityRepoImpl implements CityRepo {
     private final List<City> cities = new ArrayList<>();
@@ -59,5 +56,10 @@ public class CityRepoImpl implements CityRepo {
         return cities.stream()
                 .sorted(Comparator.comparing(City::getDistrict).thenComparing(City::getName))
                 .toList();
+    }
+
+    @Override
+    public Optional<City> getBigCity() {
+        return cities.stream().max(Comparator.comparing(City::getPopulation));
     }
 }
